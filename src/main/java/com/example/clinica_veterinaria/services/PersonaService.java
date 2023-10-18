@@ -1,12 +1,15 @@
 package com.example.clinica_veterinaria.services;
 
-import com.example.clinica_veterinaria.modelo.PersonaEntity;
+import com.example.clinica_veterinaria.modelo.dto.PersonaDto;
+import com.example.clinica_veterinaria.modelo.entities.PersonaEntity;
 
 import java.util.List;
 
 public interface PersonaService {
 
-    List<PersonaEntity> listarPersonas();
+    PersonaDto guardar(PersonaDto personaDto);
 
-    PersonaEntity consultarPorId(String id);
+    List<PersonaDto> listarPersonas();
+
+    PersonaDto consultarPorId(String id);
 }

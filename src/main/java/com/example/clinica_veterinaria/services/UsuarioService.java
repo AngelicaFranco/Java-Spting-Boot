@@ -1,7 +1,6 @@
 package com.example.clinica_veterinaria.services;
 
-import com.example.clinica_veterinaria.modelo.PersonaEntity;
-import com.example.clinica_veterinaria.modelo.UsuarioEntity;
+import com.example.clinica_veterinaria.modelo.entities.UsuarioEntity;
 
 import java.util.List;
 

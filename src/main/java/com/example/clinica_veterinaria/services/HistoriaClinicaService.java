@@ -1,6 +1,6 @@
 package com.example.clinica_veterinaria.services;
 
-import com.example.clinica_veterinaria.modelo.HistoriaClinicaEntity;
+import com.example.clinica_veterinaria.modelo.entities.HistoriaClinicaEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.clinica_veterinaria.modelo;
+package com.example.clinica_veterinaria.modelo.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "alergia")
-
 public class AlergiaEntity {
 
     @Id

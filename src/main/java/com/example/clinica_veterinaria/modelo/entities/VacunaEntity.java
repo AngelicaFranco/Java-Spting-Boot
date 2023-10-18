@@ -1,4 +1,4 @@
-package com.example.clinica_veterinaria.modelo;
+package com.example.clinica_veterinaria.modelo.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
