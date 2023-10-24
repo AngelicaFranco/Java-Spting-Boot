@@ -1,10 +1,13 @@
 package com.example.clinica_veterinaria.modelo.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -38,7 +41,8 @@ public class PersonaEntity {
     @Column(name = "correo")
     private String correo;
 
-    @Column(name = "rol")
-    private String rol;
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    private UsuarioEntity usuario;
+
 }
 

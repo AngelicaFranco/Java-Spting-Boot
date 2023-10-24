@@ -26,7 +26,6 @@ public class PersonaServiceImpl implements PersonaService {
         personaEntity.setDireccion(personaDto.getDireccion());
         personaEntity.setTelefono(personaDto.getTelefono());
         personaEntity.setCorreo(personaDto.getCorreo());
-        personaEntity.setRol(personaDto.getRol());
         personaRepository.save(personaEntity);
         return personaDto;
     }
