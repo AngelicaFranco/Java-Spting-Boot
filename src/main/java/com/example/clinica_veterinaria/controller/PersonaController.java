@@ -25,4 +25,9 @@ public class PersonaController {
     public ResponseEntity<PersonaDto> guardar(@RequestBody PersonaDto personaDto){
         return new ResponseEntity<>(personaService.guardar(personaDto), HttpStatus.CREATED);
     }
+
+    @GetMapping("/listarTodos")
+    public ResponseEntity<List<PersonaDto>> listarPersona(){
+        return new ResponseEntity<>(personaService.listarPersonas(),HttpStatus.OK);
+    }
 }
