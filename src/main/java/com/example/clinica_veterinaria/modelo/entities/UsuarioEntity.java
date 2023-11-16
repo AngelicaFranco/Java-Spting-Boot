@@ -29,7 +29,7 @@ public class UsuarioEntity {
     @Column(name = "rol")
     private String rol;
 
-    @OneToOne
-    @JoinColumn(name = "id_persona")
+    @OneToOne // especifica que es un relacion uno a uno
+    @JoinColumn(name = "id_persona") // se hace la union con la tabla persona por medio de la columna id_persona de la tabla usuario.
     private PersonaEntity persona;
 }

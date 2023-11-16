@@ -41,7 +41,7 @@ public class PersonaEntity {
     @Column(name = "correo")
     private String correo;
 
-    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL) // especifica que es un relacion uno a uno
     private UsuarioEntity usuario;
 
 }

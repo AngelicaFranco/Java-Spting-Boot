@@ -31,6 +31,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return null;
     }
 
+    /**
+     * Metodo para guardar un usuario
+     * @param usuario
+     * @return
+     */
     @Override
     @Transactional
     public String guardarUsuario(RegistroUsuarioDto usuario) {
