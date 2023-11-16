@@ -7,6 +7,7 @@ import com.example.clinica_veterinaria.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +33,21 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public List<PersonaDto> listarPersonas() {
-        return null;
+        List<PersonaEntity> listaPersona = personaRepository.findAll();
+        List<PersonaDto> resultadoPersonas = new ArrayList<>();
+        listaPersona.forEach(personaEntity -> {
+            PersonaDto item = new PersonaDto();
+            item.setNombres(personaEntity.getNombres());
+            item.setApellidos(personaEntity.getApellidos());
+            item.setIdentificacion(personaEntity.getIdentificacion());
+            item.setDireccion(personaEntity.getDireccion());
+            item.setSexo(personaEntity.getSexo());
+            item.setId(personaEntity.getId());
+            item.setCorreo(personaEntity.getCorreo());
+            item.setTelefono(personaEntity.getTelefono());
+            resultadoPersonas.add(item);
+        });
+    return resultadoPersonas;
     }
 
     @Override
