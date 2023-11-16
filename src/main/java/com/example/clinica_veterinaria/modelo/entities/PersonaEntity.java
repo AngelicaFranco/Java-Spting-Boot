@@ -7,9 +7,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -43,6 +46,9 @@ public class PersonaEntity {
 
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL) // especifica que es un relacion uno a uno
     private UsuarioEntity usuario;
+
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL) // especifica que es un relacion uno a uno
+    private List<AnimalEntity> mascotas;
 
 }
 

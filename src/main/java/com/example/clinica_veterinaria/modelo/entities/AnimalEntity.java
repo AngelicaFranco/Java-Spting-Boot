@@ -3,6 +3,10 @@ package com.example.clinica_veterinaria.modelo.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -40,4 +44,8 @@ public class AnimalEntity {
 
     @Column(name = "notas")
     private String notas;
+
+    @ManyToOne // especifica que es un relacion uno a muchos - en este caso un propietario puede tener muchos animales
+    @JoinColumn(name = "id_propietario") // se hace la union con la tabla persona por medio de la columna id_propietario de la tabla animal.
+    private PersonaEntity propietario;
 }
