@@ -1,9 +1,6 @@
 package com.example.clinica_veterinaria.modelo.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Time;
@@ -16,14 +13,19 @@ import java.util.Date;
 public class CitaMedicaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "fecha")
     private Date fecha;
 
-    @Column(name = "hora")
-    private Time hora;
-
     @Column(name = "profesional")
     private String profesional;
+
+    @ManyToOne
+    @JoinColumn(name = "id_animal")
+    private AnimalEntity animal;
+
+    @OneToOne(mappedBy = "citaMedica", cascade = CascadeType.ALL)
+    private HistoriaClinicaEntity historiaclinica;
 }

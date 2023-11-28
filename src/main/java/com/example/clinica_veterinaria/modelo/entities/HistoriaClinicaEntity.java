@@ -12,13 +12,8 @@ import java.util.Date;
 public class HistoriaClinicaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "fecha_ingreso")
-    private Date fecha_ingreso;
-
-    @Column(name = "fecha_egreso")
-    private Date fecha_egreso;
 
     @Column(name = "antecedentes")
     private String antecedentes;
@@ -37,4 +32,8 @@ public class HistoriaClinicaEntity {
 
     @Column(name = "hallazgo")
     private String hallazgo;
+
+    @OneToOne
+    @JoinColumn(name = "id_citamedica")
+    private CitaMedicaEntity citaMedica;
 }

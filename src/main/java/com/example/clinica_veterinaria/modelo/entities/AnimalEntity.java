@@ -1,16 +1,10 @@
 package com.example.clinica_veterinaria.modelo.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,6 +13,7 @@ import java.util.Date;
 public class AnimalEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombres")
@@ -48,4 +43,7 @@ public class AnimalEntity {
     @ManyToOne // especifica que es un relacion uno a muchos - en este caso un propietario puede tener muchos animales
     @JoinColumn(name = "id_propietario") // se hace la union con la tabla persona por medio de la columna id_propietario de la tabla animal.
     private PersonaEntity propietario;
+
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL)
+    private List<CitaMedicaEntity> citas;
 }
