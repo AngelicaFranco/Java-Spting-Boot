@@ -1,18 +1,23 @@
 package com.example.clinica_veterinaria.services.impl;
 
+import com.example.clinica_veterinaria.exceptions.ApiException;
 import com.example.clinica_veterinaria.modelo.dto.RegistroUsuarioDto;
 import com.example.clinica_veterinaria.modelo.entities.PersonaEntity;
 import com.example.clinica_veterinaria.modelo.entities.UsuarioEntity;
 import com.example.clinica_veterinaria.repository.PersonaRepository;
 import com.example.clinica_veterinaria.repository.UsuarioRepository;
 import com.example.clinica_veterinaria.services.UsuarioService;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Slf4j // para poder usar el log
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
@@ -20,6 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     PersonaRepository personaRepository;
+
+    @Autowired
+    ModelMapper mapper;
 
     @Override
     public List<UsuarioEntity> listarUsuarios() {
@@ -33,29 +41,31 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     /**
      * Metodo para guardar un usuario
+     *
      * @param usuario
      * @return
      */
     @Override
     @Transactional
     public String guardarUsuario(RegistroUsuarioDto usuario) {
-        PersonaEntity persona = new PersonaEntity();
-        persona.setNombres(usuario.getDatosPersona().getNombres());
-        persona.setApellidos(usuario.getDatosPersona().getApellidos());
-        persona.setDireccion(usuario.getDatosPersona().getDireccion());
-        persona.setTelefono(usuario.getDatosPersona().getTelefono());
-        persona.setCorreo(usuario.getDatosPersona().getCorreo());
-        persona.setSexo(usuario.getDatosPersona().getSexo());
-        persona.setIdentificacion(usuario.getDatosPersona().getIdentificacion());
-        personaRepository.save(persona);
 
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
-        usuarioEntity.setUsuario(usuario.getDatosUsuario().getUsuario());
-        usuarioEntity.setContrasena(usuario.getDatosUsuario().getContrasena());
-        usuarioEntity.setRol(usuario.getDatosUsuario().getRol());
-        usuarioEntity.setPersona(persona);
-        usuarioRepository.save(usuarioEntity);
-        return "Usuario guardado";
+        try {
+            if (usuario.getDatosPersona() == null) {
+                throw new ApiException("Los datos de la persona no pueden ser nulos", HttpStatus.BAD_REQUEST);
+            }
+            PersonaEntity persona = mapper.map(usuario.getDatosPersona(), PersonaEntity.class);
+            personaRepository.save(persona);
+            UsuarioEntity usuarioEntity = mapper.map(usuario.getDatosUsuario(), UsuarioEntity.class);
+            usuarioEntity.setPersona(persona);
+            usuarioRepository.save(usuarioEntity);
+            return "Usuario guardado";
+        } catch (Exception e) {
+            log.error("Error al guardar el usuario: {}", e.getMessage());
+            if (e instanceof ApiException){
+                throw e;
+            }
+            throw new ApiException("Error al guardar el usuario", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

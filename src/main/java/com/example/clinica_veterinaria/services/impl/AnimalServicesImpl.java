@@ -5,6 +5,7 @@ import com.example.clinica_veterinaria.modelo.entities.AnimalEntity;
 import com.example.clinica_veterinaria.modelo.entities.PersonaEntity;
 import com.example.clinica_veterinaria.repository.AnimalRepository;
 import com.example.clinica_veterinaria.services.AnimalService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class AnimalServicesImpl implements AnimalService {
 
     @Autowired
     private AnimalRepository animalRepository;
+
     @Override
     public AnimalDto guardar(AnimalDto animalDto) {
         AnimalEntity animalEntity = new AnimalEntity();
