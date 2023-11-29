@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * Exception personalizada.
  */
+
 @Data
 public class ApiException extends RuntimeException {
 
@@ -17,6 +18,7 @@ public class ApiException extends RuntimeException {
      *  codigo del error.
      */
     private HttpStatus status;
+
 
 
     /**

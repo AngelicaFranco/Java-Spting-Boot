@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j // para poder usar el log
@@ -53,6 +54,13 @@ public class UsuarioServiceImpl implements UsuarioService {
             if (usuario.getDatosPersona() == null) {
                 throw new ApiException("Los datos de la persona no pueden ser nulos", HttpStatus.BAD_REQUEST);
             }
+
+            // verificar si existe un usuario con el mismo nombre de usuario
+            UsuarioEntity usuarioEntityOp = usuarioRepository.findByUsuario(usuario.getDatosUsuario().getUsuario());
+            if (usuarioEntityOp != null) {
+                throw new ApiException("El usuario ya existe.", HttpStatus.BAD_REQUEST);
+            }
+
             PersonaEntity persona = mapper.map(usuario.getDatosPersona(), PersonaEntity.class);
             personaRepository.save(persona);
             UsuarioEntity usuarioEntity = mapper.map(usuario.getDatosUsuario(), UsuarioEntity.class);
@@ -60,10 +68,10 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioRepository.save(usuarioEntity);
             return "Usuario guardado";
         } catch (Exception e) {
-            log.error("Error al guardar el usuario: {}", e.getMessage());
-            if (e instanceof ApiException){
+            if (e instanceof ApiException) {
                 throw e;
             }
+            log.error("Error al guardar el usuario: {}", e.getMessage());
             throw new ApiException("Error al guardar el usuario", HttpStatus.BAD_REQUEST);
         }
     }
