@@ -2,6 +2,7 @@ package com.example.clinica_veterinaria.controller;
 
 import com.example.clinica_veterinaria.modelo.dto.AnimalDto;
 import com.example.clinica_veterinaria.modelo.dto.PersonaDto;
+import com.example.clinica_veterinaria.modelo.dto.RespuestaDto;
 import com.example.clinica_veterinaria.modelo.entities.AnimalEntity;
 import com.example.clinica_veterinaria.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AnimalController {
     private AnimalService animalService;
 
     @PostMapping("/guardar")
-    public ResponseEntity<AnimalDto> guardar(@RequestBody AnimalDto animalDto){
+    public ResponseEntity<RespuestaDto> guardar(@RequestBody AnimalDto animalDto){
         return new ResponseEntity<>(animalService.guardar(animalDto), HttpStatus.CREATED);
     }
 

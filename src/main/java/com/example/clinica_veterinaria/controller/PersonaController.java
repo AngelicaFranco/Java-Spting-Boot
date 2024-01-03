@@ -1,6 +1,7 @@
 package com.example.clinica_veterinaria.controller;
 
 import com.example.clinica_veterinaria.modelo.dto.PersonaDto;
+import com.example.clinica_veterinaria.modelo.dto.RespuestaDto;
 import com.example.clinica_veterinaria.modelo.entities.PersonaEntity;
 import com.example.clinica_veterinaria.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class PersonaController {
 
 
     @PostMapping("/guardar")
-    public ResponseEntity<PersonaDto> guardar(@RequestBody PersonaDto personaDto){
+    public ResponseEntity<RespuestaDto> guardar(@RequestBody PersonaDto personaDto){
         return new ResponseEntity<>(personaService.guardar(personaDto), HttpStatus.CREATED);
     }
 

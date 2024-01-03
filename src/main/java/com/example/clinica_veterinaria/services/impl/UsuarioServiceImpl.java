@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
      * @return
      */
     @Override
-    @Transactional
+    @Transactional // retrocede los cambios que se alcanzó a realizar en la BD en caso de ocurrir un error
     public String guardarUsuario(RegistroUsuarioDto usuario) {
 
         try {
@@ -64,7 +64,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             PersonaEntity persona = mapper.map(usuario.getDatosPersona(), PersonaEntity.class);
             personaRepository.save(persona);
             UsuarioEntity usuarioEntity = mapper.map(usuario.getDatosUsuario(), UsuarioEntity.class);
-            usuarioEntity.setPersona(persona);
+            usuarioEntity.setPersona(persona); //este usuario le pertenece a esta persona
             usuarioRepository.save(usuarioEntity);
             return "Usuario guardado";
         } catch (Exception e) {

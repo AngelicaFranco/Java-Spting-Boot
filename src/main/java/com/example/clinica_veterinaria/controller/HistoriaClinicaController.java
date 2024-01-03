@@ -2,6 +2,7 @@ package com.example.clinica_veterinaria.controller;
 
 import com.example.clinica_veterinaria.modelo.dto.HistoriaClinicaDto;
 import com.example.clinica_veterinaria.modelo.dto.PersonaDto;
+import com.example.clinica_veterinaria.modelo.dto.RespuestaDto;
 import com.example.clinica_veterinaria.modelo.entities.HistoriaClinicaEntity;
 import com.example.clinica_veterinaria.services.HistoriaClinicaService;
 import com.example.clinica_veterinaria.services.PersonaService;
@@ -21,7 +22,7 @@ public class HistoriaClinicaController {
 
 
     @PostMapping("/guardar")
-    public ResponseEntity<HistoriaClinicaDto> guardar(@RequestBody HistoriaClinicaDto historiaClinicaDto){
+    public ResponseEntity<RespuestaDto> guardar(@RequestBody HistoriaClinicaDto historiaClinicaDto){
         return new ResponseEntity<>(historiaClinicaService.guardar(historiaClinicaDto), HttpStatus.CREATED);
     }
 
